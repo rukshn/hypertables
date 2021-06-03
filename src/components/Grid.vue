@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, HTMLAttributes } from 'vue'
 export default defineComponent({
   name: 'Grid',
   data() {
@@ -38,7 +38,7 @@ export default defineComponent({
       const newRow:number = +row + 1
       const newCol:number = 0
       const ref:string = `col-${newCol}-row-${newRow}`
-      if(this.$refs[ref]) this.$refs[ref].focus()
+      if(this.$refs[ref]) (this.$refs[ref] as HTMLInputElement).focus()
     },
     tabCell(e:any) {
       e.preventDefault()
@@ -49,7 +49,7 @@ export default defineComponent({
       const newCol:number = +col + 1
 
       const ref:string = `col-${newCol}-row-${newRow}`
-      if(this.$refs[ref]) this.$refs[ref].focus()
+      if(this.$refs[ref]) (this.$refs[ref] as HTMLInputElement).focus()
     },
     cellDown(e:any) {
       e.preventDefault()
@@ -59,7 +59,7 @@ export default defineComponent({
       const newRow:number = +row + 1
       const newCol:number = col
       const ref:string = `col-${newCol}-row-${newRow}`
-      if(this.$refs[ref]) this.$refs[ref].focus()
+      if(this.$refs[ref]) (this.$refs[ref] as HTMLInputElement).focus()
     },
     cellUp(e:any) {
       e.preventDefault()
@@ -69,7 +69,7 @@ export default defineComponent({
       const newRow:number = +row - 1
       const newCol:number = col
       const ref:string = `col-${newCol}-row-${newRow}`
-      if(this.$refs[ref]) this.$refs[ref].focus()
+      if(this.$refs[ref]) (this.$refs[ref] as HTMLInputElement).focus()
     },
     cellLeft(e:any) {
       e.preventDefault()
@@ -79,7 +79,7 @@ export default defineComponent({
       const newRow:number = row
       const newCol:number = +col - 1
       const ref:string = `col-${newCol}-row-${newRow}`
-      if(this.$refs[ref]) this.$refs[ref].focus()
+      if(this.$refs[ref]) (this.$refs[ref] as HTMLInputElement).focus()
     },
     cellRight(e:any) {
       e.preventDefault()
@@ -89,7 +89,7 @@ export default defineComponent({
       const newRow:number = row
       const newCol:number = +col + 1
       const ref:string = `col-${newCol}-row-${newRow}`
-      if(this.$refs[ref]) this.$refs[ref].focus()
+      if(this.$refs[ref]) (this.$refs[ref] as HTMLInputElement).focus()
     }
   }
 })
