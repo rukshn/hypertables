@@ -62,6 +62,26 @@
             </div>
           </div>
 
+          <div v-if="column.type === 'number'">
+            <input
+            :readonly="disabled"
+            @keydown="enable"
+            @keydown.down.exact="cellDown"
+            @keydown.up.exact="cellUp"
+            @keydown.left.exact="cellLeft"
+            @keydown.right.exact="cellRight"
+            @keydown.enter.exact="enterCell"
+            @keydown.tab.exact="tabCell"
+            @click="enable"
+            @focus="changeActiveCell(colIndex, rowIndex)"
+            :data-cell-type="column.type"
+            :ref="bindRow(rowIndex, colIndex)"
+            :data-col="colIndex"
+            :data-row="rowIndex"
+            type="number"
+            class="focus:outline-none text-right focus:bg-blue-100 focus:border-gray-200 py-1 px-1 border border-gray-100 min-w-full" />
+          </div>
+
           <div v-if="column.type ==='enum'">
             <input :readonly="disabled"
             @keydown="enable"
@@ -133,6 +153,10 @@
         }, {
           title: "Date",
           type: "date",
+          value: []
+        }, {
+          title: "Number",
+          type: "number",
           value: []
         }]
       }
@@ -249,7 +273,7 @@
       },
       showPopup(colIndex:number, rowIndex:number) {
         const cell:HTMLElement = this.$refs[`col-${colIndex}-row-${rowIndex}`] as HTMLElement
-        if (this.disabled === false && cell.getAttribute('data-cell-type') !== 'string') {
+        if (this.disabled === false && (cell.getAttribute('data-cell-type') === 'enum')) {
           const popup:HTMLElement = this.$refs[`popup-col-${colIndex}-row-${rowIndex}`] as HTMLElement
           if(popup.classList.contains('hidden')) popup.classList.remove('hidden')
         }
@@ -274,7 +298,7 @@
       changeActiveCell(colIndex:number, rowIndex:number) {
         const oldActiveCell = this.activeCell
         const cell:HTMLElement = this.$refs[`col-${oldActiveCell.col}-row-${oldActiveCell.row}`] as HTMLElement
-        if(cell.getAttribute('data-cell-type') !== 'string') {
+        if (this.disabled === false && cell.getAttribute('data-cell-type') === 'enum') {
           this.hidePopup(oldActiveCell.col, oldActiveCell.row)
         }
         this.activeCell = {col: colIndex, row: rowIndex}
