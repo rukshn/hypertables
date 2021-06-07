@@ -3,7 +3,8 @@
     <div class="grid_column flex">
       <div class="w-1/6" v-for="(column, colIndex) in structure.columns" :key="colIndex" :ref="bindCol(colIndex)">
         <div class="bg-gray-200 border-b border-r border-gray-300 text-center select-none py-1 px-2 w-full">
-          {{column.title}}</div>
+          {{column.title}}
+        </div>
         <div class="w-full" :class="{'flex': colIndex === 0}" v-for="(row, rowIndex) in structure.rows" :key="rowIndex">
           <input
             v-if="column.type === 'string'"
@@ -25,7 +26,7 @@
             class="focus:outline-none focus:bg-blue-100 focus:border-gray-200 py-1 px-1 border border-gray-100 min-w-full" />
 
           <div v-if="column.type === 'date'" class="flex">
-            <input :readonly="disabled"
+            <input readonly
                 @keydown.down.exact="cellDown"
                 @keydown.up.exact="cellUp"
                 @keydown.left.exact="cellLeft"
@@ -141,7 +142,7 @@
           value: String[]
         } >
       } = {
-        rows: 50,
+        rows: 5,
         columns: [{
           title: "Name",
           type: "string",
