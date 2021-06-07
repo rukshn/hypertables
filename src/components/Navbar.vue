@@ -1,7 +1,7 @@
 <template>
   <div class="navbar select-none bg-blue-500 py-2 px-5 flex justify-center">
     <h1 class="text-white font-bold flex items-center">HyperTables⚡️</h1>
-    <h1 class="text-white font-bold flex items-center text-lg flex-grow content-center">Table Name</h1>
+    <h1 class="text-white font-bold flex items-center text-lg flex-grow justify-center">Database Name</h1>
     <div class="buttons flex content-end items-center w-1/12">
       <a class="bg-transparent flex items-center space-x-2 text-sm text-blue-100 font-semibold hover:text-blue-50 uppercase" href="/help"
         target="_blank"><span>help</span>
