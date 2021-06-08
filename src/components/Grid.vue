@@ -2,8 +2,20 @@
   <div>
     <div class="grid_column flex">
       <div class="w-1/6" v-for="(column, colIndex) in structure.columns" :key="colIndex" :ref="bindCol(colIndex)">
-        <div class="bg-gray-200 border-b border-r border-gray-300 text-center select-none py-1 px-2 w-full">
+        <div class="bg-gray-100 max-h-8 flex text-sm border-b border-r border-gray-300 text-center select-none py-1 px-2 w-full">
+          <svg v-if="column.type === 'date'" height="20" id="svg4050" version="1.1" viewBox="0 0 32 32.000001" width="32" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs4052"/><g id="layer1" transform="translate(0,-1020.3622)"><path d="M 6.09375 4 C 4.9414274 4 3.9980469 4.9434031 3.9980469 6.0957031 L 3.9980469 8.3652344 C 3.8597937 8.4494879 3.7284008 8.545258 3.609375 8.6542969 C 3.163242 9.0630969 2.8656464 9.7110531 3.0625 10.376953 L 4.9980469 16.923828 A 0.50005 0.50005 0 0 0 5.0039062 17.111328 L 3.0546875 25.654297 C 2.903844 26.315497 3.1891968 26.944262 3.6269531 27.351562 C 4.0647094 27.758863 4.6565934 28 5.2753906 28 L 26.724609 28 C 27.343406 28 27.935289 27.758863 28.373047 27.351562 C 28.810805 26.944262 29.096164 26.315497 28.945312 25.654297 L 26.994141 17.101562 A 0.50005 0.50005 0 0 0 27 16.931641 L 28.9375 10.376953 C 29.134344 9.7110531 28.836756 9.0630969 28.390625 8.6542969 C 28.270529 8.5442775 28.137695 8.4480532 27.998047 8.3632812 L 27.998047 6.0957031 C 27.998047 4.9434031 27.054666 4 25.902344 4 L 6.09375 4 z M 6.09375 5 L 25.902344 5 C 26.518011 5 26.998047 5.4801031 26.998047 6.0957031 L 26.998047 8.0253906 C 26.906946 8.0147689 26.817157 8 26.724609 8 L 5.2753906 8 C 5.1815325 8 5.0904108 8.0144698 4.9980469 8.0253906 L 4.9980469 6.0957031 C 4.9980469 5.4801031 5.478082 5 6.09375 5 z M 11.498047 6 A 0.5 0.5 0 0 0 10.998047 6.5 A 0.5 0.5 0 0 0 11.498047 7 A 0.5 0.5 0 0 0 11.998047 6.5 A 0.5 0.5 0 0 0 11.498047 6 z M 20.498047 6 A 0.5 0.5 0 0 0 19.998047 6.5 A 0.5 0.5 0 0 0 20.498047 7 A 0.5 0.5 0 0 0 20.998047 6.5 A 0.5 0.5 0 0 0 20.498047 6 z M 5.2753906 9 L 26.724609 9 C 27.06404 9 27.467839 9.162525 27.716797 9.390625 C 27.965755 9.618625 28.054067 9.83815 27.978516 10.09375 L 26.083984 16.5 L 24.498047 16.5 A 0.50005 0.50005 0 1 0 24.498047 17.5 L 26.058594 17.5 L 27.970703 25.876953 C 28.033573 26.152453 27.934073 26.393341 27.691406 26.619141 C 27.448744 26.844841 27.066676 27 26.724609 27 L 5.2753906 27 C 4.9333234 27 4.5512553 26.844841 4.3085938 26.619141 C 4.065932 26.393341 3.9664285 26.152453 4.0292969 25.876953 L 5.9414062 17.5 L 7.4980469 17.5 A 0.50005 0.50005 0 1 0 7.4980469 16.5 L 5.9160156 16.5 L 4.0214844 10.09375 C 3.9459304 9.83815 4.0342444 9.618625 4.2832031 9.390625 C 4.532162 9.162525 4.93596 9 5.2753906 9 z M 21.513672 10.994141 L 21.513672 10.996094 A 0.50005 0.50005 0 0 0 21.332031 11.023438 L 18.345703 12.023438 A 0.50005 0.50005 0 1 0 18.662109 12.970703 L 20.998047 12.189453 L 20.998047 24.507812 A 0.50005 0.50005 0 1 0 21.998047 24.507812 L 21.998047 11.507812 A 0.50005 0.50005 0 0 0 21.998047 11.492188 A 0.50005 0.50005 0 0 0 21.990234 11.408203 A 0.50005 0.50005 0 0 0 21.984375 11.378906 A 0.50005 0.50005 0 0 0 21.941406 11.265625 A 0.50005 0.50005 0 0 0 21.927734 11.240234 A 0.50005 0.50005 0 0 0 21.513672 10.994141 z M 14.472656 11 C 12.951125 11.025104 11.581223 12.067428 11.175781 13.595703 A 0.50005 0.50005 0 1 0 12.142578 13.851562 C 12.476422 12.593063 13.691746 11.814063 14.955078 12.039062 C 16.218412 12.264062 17.10071 13.42035 16.988281 14.71875 C 16.875844 16.01705 15.809956 17 14.527344 17 A 0.50005 0.50005 0 0 0 14.357422 17.027344 C 14.237973 17.016496 14.11955 17 13.998047 17 A 0.50004997 0.50004997 0 1 0 13.998047 18 C 15.212829 18 16.304645 18.731116 16.769531 19.853516 C 17.234402 20.976016 16.978116 22.263947 16.119141 23.123047 C 15.260151 23.982147 13.971931 24.238337 12.849609 23.773438 C 11.727274 23.308438 10.998021 22.216953 10.998047 21.001953 A 0.50004997 0.50004997 0 1 0 9.9980469 21.001953 C 9.998013 22.618453 10.973413 24.078666 12.466797 24.697266 C 13.960161 25.315866 15.683231 24.973178 16.826172 23.830078 C 17.969094 22.687078 18.311882 20.964203 17.693359 19.470703 C 17.365024 18.677975 16.795867 18.036418 16.095703 17.603516 C 17.129757 17.0693 17.877458 16.039313 17.984375 14.804688 C 18.140328 13.003688 16.900628 11.369888 15.130859 11.054688 C 14.909639 11.015287 14.690018 10.996414 14.472656 11 z " id="rect3486" style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" transform="translate(0,1020.3622)"/></g></svg>
           {{column.title}}
+          <button :ref="bindColMenuButton(colIndex)" @click="toggleColumnMenuPopover(colIndex)" class="w-1/12 focus:outline-none">
+            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div :ref="bindColMenu(colIndex)"
+            class="w-64 text-gray-50 hidden bg-gray-700 border border-gray-200 z-50 leading-normal text-sm max-w-xs text-left no-underline break-words">
+            <div>
+              <button class="px-3 py-1 w-full focus:outline-none hover:bg-gray-600">Delete column</button>
+            </div>
+          </div>
         </div>
         <div class="w-full" :class="{'flex': colIndex === 0}" v-for="(row, rowIndex) in structure.rows" :key="rowIndex">
           <input
@@ -114,7 +126,7 @@
         </div>
       </div>
       <div class="w-1/12">
-        <div class="bg-gray-200 hover:bg-gray-300 border-b border-r border-gray-300 text-center select-none py-1 px-2 w-full">
+        <div class="max-h-8 text-sm bg-gray-100 hover:bg-gray-300 border-b border-r border-gray-300 text-center select-none py-1 px-2 w-full">
           <button @click="toggleCreateTabPopover" ref="btnNewColumn" class="w-full focus:outline-none">+</button>
         </div>
 
@@ -255,6 +267,27 @@
           this.columnType = "Single text"
         }
       },
+      toggleColumnMenuPopover(index:number) {
+        const popover:HTMLElement = this.$refs[`colMenu${index}`] as HTMLElement
+        if(popover.classList.contains('block')) {
+          popover.classList.remove('block')
+          popover.classList.add('hidden')
+        } else {
+          popover.classList.remove('hidden')
+          popover.classList.add('block')
+          const button:HTMLElement = this.$refs[`colMenuButton${index}`] as HTMLElement
+          createPopper(button, popover, { placement: 'bottom',
+            modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: () => [40]
+                }
+              }
+            ]
+          })
+        }
+      },
       toggleCreateTabPopover() {
         if (this.showCreateTabPopover) {
           this.showCreateTabPopover = false
@@ -273,6 +306,12 @@
             ]
           })
         }
+      },
+      bindColMenu(index:number) {
+        return `colMenu${index}`
+      },
+      bindColMenuButton(index:number) {
+        return `colMenuButton${index}`
       },
       bindCol(n: number) {
         return `col${n}`
@@ -397,7 +436,7 @@
       changeActiveCell(colIndex:number, rowIndex:number) {
         const oldActiveCell = this.activeCell
         const cell:HTMLElement = this.$refs[`col-${oldActiveCell.col}-row-${oldActiveCell.row}`] as HTMLElement
-        if (this.disabled === false && cell.getAttribute('data-cell-type') === 'enum') {
+        if (cell.getAttribute('data-cell-type') === 'enum') {
           this.hidePopup(oldActiveCell.col, oldActiveCell.row)
         }
         this.activeCell = {col: colIndex, row: rowIndex}
