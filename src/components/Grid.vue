@@ -113,6 +113,53 @@
           </div>
         </div>
       </div>
+      <div class="w-1/12">
+        <div class="bg-gray-200 hover:bg-gray-300 border-b border-r border-gray-300 text-center select-none py-1 px-2 w-full">
+          <button @click="toggleCreateTabPopover" ref="btnNewColumn" class="w-full focus:outline-none">+</button>
+        </div>
+
+        <div ref="newColumnRef" v-bind:class="{'hidden': !showCreateTabPopover, 'block': showCreateTabPopover}"
+            class="w-80 bg-white border border-gray-200 border-0 block z-50 leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg">
+          <div>
+            <div class="bg-blue-100 py-2 px-3 opacity-75 font-semibold border-b border-solid uppercase rounded-t-lg">
+              select a column type
+            </div>
+            <div class="py-2 px-2 space-y-2">
+              <div class="field">
+                <div class="control">
+                  <input type="text" placeholder="Column title" class="py-2 px-2 rounded-md w-full border-2 border-gray-400 outline-none focus:border-indigo-500 focus:bg-gray-100" v-model="newColumnName">
+                </div>
+              </div>
+
+              <div class="dropdown flex">
+                <input v-model="columnType" type="text" disabled class="rounded-l-md flex-grow py-2 px-2 border border-gray-300">
+                <button @click="showColumnTypeDropdown = true" class="bg-gray-200 focus:outline-none hover:bg-gray-300 w-1/6 px-2 py-2 rounded-r-md">
+                  <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+              <div v-if="showColumnTypeDropdown === true" class="border border-gray-300 rounded-md">
+                <button @click="showColumnCreator('string')" class="px-3 text-left py-2 w-full hover:bg-blue-200 text-gray-700">Signe line text</button>
+                <button @click="showColumnCreator('multiline')" class="px-3 text-left py-2 w-full hover:bg-blue-200 text-gray-700">Multiline text</button>
+                <button @click="showColumnCreator('date')" class="px-3 text-left py-2 w-full hover:bg-blue-200 text-gray-700">Date</button>
+                <button @click="showColumnCreator('enum')" class="px-3 text-left py-2 w-full hover:bg-blue-200 text-gray-700">Select</button>
+              </div>
+
+              <div v-if="showNSLC" class="py-2 space-y-2">
+                <p class="text-gray-500">
+                  Single line of text.
+                </p>
+
+                <div class="space-x-2">
+                  <button @click="createColumn('string')" class="bg-blue-500 rounded-md text-white px-3 py-2 hover:bg-blue-600 focus:outline-none">Create Column</button>
+                  <button class="focus:outline-none">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -120,6 +167,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { DatePicker } from 'v-calendar';
+  import { createPopper } from "@popperjs/core";
 
   export default defineComponent({
     name: 'Grid',
@@ -131,6 +179,13 @@
         row: 0,
         col: 0
       }
+
+      // popover related values
+      const showCreateTabPopover:boolean = false
+      const showNSLC:boolean = false
+      const newColumnName:string = ""
+      const showColumnTypeDropdown:boolean = false
+      const columnType:string = ""
 
       const date:Date = new Date()
 
@@ -167,7 +222,12 @@
         structure,
         disabled,
         activeCell,
-        date
+        date,
+        showCreateTabPopover,
+        showNSLC,
+        newColumnName,
+        showColumnTypeDropdown,
+        columnType
       }
     },
 
@@ -176,6 +236,44 @@
       if(this.$refs[`col-${activeCell.col}-row-${activeCell.row}`]) (this.$refs[`col-${activeCell.col}-row-${activeCell.row}`] as HTMLElement).focus()
     },
     methods: {
+      createColumn(type:string) {
+        if (type === 'string') {
+          const newColumn: {title: string, type: string, value: String[]} = {
+            title: this.newColumnName || 'Column' + this.structure.columns.length + 1,
+            type: 'string',
+            value: []
+          }
+          this.structure.columns.push(newColumn)
+          this.newColumnName = ''
+          this.showCreateTabPopover = false
+        }
+      },
+      showColumnCreator(type:string) {
+        this.showNSLC = true
+        if (type === 'string') {
+          this.showColumnTypeDropdown = false
+          this.columnType = "Single text"
+        }
+      },
+      toggleCreateTabPopover() {
+        if (this.showCreateTabPopover) {
+          this.showCreateTabPopover = false
+        } else {
+          this.showCreateTabPopover = true
+          const newColumnButton:HTMLButtonElement = this.$refs['btnNewColumn'] as HTMLButtonElement
+          const newColumnPopover:HTMLElement = this.$refs['newColumnRef'] as HTMLElement
+          createPopper(newColumnButton, newColumnPopover, {placement: 'bottom',
+          modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: () => [40]
+                }
+              }
+            ]
+          })
+        }
+      },
       bindCol(n: number) {
         return `col${n}`
       },
