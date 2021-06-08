@@ -6,6 +6,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
     "v-calendar": "^3.0.0-alpha.4",
     "vue": "^3.0.5"
   },
