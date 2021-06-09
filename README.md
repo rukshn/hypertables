@@ -6,7 +6,7 @@
 
 
 
-[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
+[![AGPL License](https://img.shields.io/badge/license-GPL%203.0-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
 An open-source frontend for your database to perform CURD actions, as simple as working with Excel or AirTable.
 
