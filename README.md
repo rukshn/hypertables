@@ -1,5 +1,5 @@
 
-![HyperTables](https://i.imgur.com/rLwvBEq.png)
+<img src="https://i.imgur.com/rLwvBEq.png" height="256" />
 
 # HyperTables⚡️
 
