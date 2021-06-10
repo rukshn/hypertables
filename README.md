@@ -1,5 +1,5 @@
 
-<p stryle="text-align: center;">
+<p align="center">
   <img src="https://i.imgur.com/rLwvBEq.png" height="256" />
 </p>
 
