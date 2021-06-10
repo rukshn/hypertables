@@ -3,9 +3,9 @@
   <img src="https://i.imgur.com/rLwvBEq.png" height="256" />
 </p>
 
-# HyperTables⚡️
-
-
+<h1 align="center">
+  HyperTables⚡️
+</h1>
 
 
 [![AGPL License](https://img.shields.io/badge/license-GPL%203.0-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
