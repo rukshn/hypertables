@@ -50,7 +50,6 @@ Start the server
 ```bash
   npm run dev
 ```
-<<<<<<< HEAD
 
 ## Contributing
 
@@ -59,5 +58,3 @@ Contributions are always welcome!
 Feel free to see our code, and make a pull request with your contribution.
 
 Found a bug? Open an issue on GitHub.
-=======
->>>>>>> 3d8f1d22044823d5547fec2549022d58efd6f10f
