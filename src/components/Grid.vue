@@ -1,8 +1,23 @@
 <template>
   <div>
     <multiline-input :currentValue="currentMultilineInput" v-if="multiline_input_popup" @save-multiline="saveMultiline" @close-multiline-popup="multiline_input_popup = false" />
+    <div class="py-1 px-3 flex space-x-2 border-b border-gray-200">
+      <input v-model="searchQuery" @change="search" type="text" class="border-gray-300 w-64 rounded-md border-2 focus:outline-none focus:border-indigo-500 px-2 py-1" placeholder="Search">
+      <button class="border-2 w-12 flex justify-center px-1 py-1 border-gray-300 rounded-md focus:bg-gray-100 hover:border-gray-400 focus:outline-none">
+        <svg enable-background="new 0 0 80 80" height="24" id="Icons" version="1.1" viewBox="0 0 80 80" width="80px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="61,37 43,37 43,19 37,19 37,37 19,37 19,43 37,43 37,61 43,61 43,43 61,43 "/></svg>
+      </button>
+      <button class="border-2 w-12 flex justify-center px-1 py-1 border-gray-300 rounded-md focus:bg-gray-100 hover:border-gray-400 focus:outline-none">
+        <svg enable-background="new 0 0 80 80" height="24" id="Icons" version="1.1" viewBox="0 0 80 80" width="24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M52,33v29H28V33H52 M57,28H23v39h34V28L57,28z"/><path d="M45,20v-3H35v3H20v5h40v-5H45z"/></g></svg>
+      </button>
+    </div>
     <div class="grid_column flex">
-      <div class="w-1/6" v-for="(column, colIndex) in structure.columns" :key="colIndex" :ref="bindCol(colIndex)">
+      <div class="w-32">
+        <div class="bg-gray-100 max-h-8 text-left text-sm border-r border-b border-gray-300 select-none py-1 px-2">#</div>
+        <div class="focus-within:border-gray-200 focus-within:bg-blue-100 py-1 px-1 border border-gray-100 min-w-full" v-for="(row, rowIndex) in structure.rows" :key="rowIndex">
+          <input data-value="" @change="rowSelect(rowIndex)" class="focus:outline-none" type="checkbox" />
+        </div>
+      </div>
+      <div v-for="(column, colIndex) in structure.columns" :key="colIndex" :ref="bindCol(colIndex)">
         <div class="bg-gray-100 max-h-8 flex text-sm border-b border-r border-gray-300 text-center select-none py-1 px-2 w-full">
           <svg v-if="column.icon === 'calendar'" height="20" id="svg4050" version="1.1" viewBox="0 0 32 32.000001" width="32" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs4052"/><g id="layer1" transform="translate(0,-1020.3622)"><path d="M 6.09375 4 C 4.9414274 4 3.9980469 4.9434031 3.9980469 6.0957031 L 3.9980469 8.3652344 C 3.8597937 8.4494879 3.7284008 8.545258 3.609375 8.6542969 C 3.163242 9.0630969 2.8656464 9.7110531 3.0625 10.376953 L 4.9980469 16.923828 A 0.50005 0.50005 0 0 0 5.0039062 17.111328 L 3.0546875 25.654297 C 2.903844 26.315497 3.1891968 26.944262 3.6269531 27.351562 C 4.0647094 27.758863 4.6565934 28 5.2753906 28 L 26.724609 28 C 27.343406 28 27.935289 27.758863 28.373047 27.351562 C 28.810805 26.944262 29.096164 26.315497 28.945312 25.654297 L 26.994141 17.101562 A 0.50005 0.50005 0 0 0 27 16.931641 L 28.9375 10.376953 C 29.134344 9.7110531 28.836756 9.0630969 28.390625 8.6542969 C 28.270529 8.5442775 28.137695 8.4480532 27.998047 8.3632812 L 27.998047 6.0957031 C 27.998047 4.9434031 27.054666 4 25.902344 4 L 6.09375 4 z M 6.09375 5 L 25.902344 5 C 26.518011 5 26.998047 5.4801031 26.998047 6.0957031 L 26.998047 8.0253906 C 26.906946 8.0147689 26.817157 8 26.724609 8 L 5.2753906 8 C 5.1815325 8 5.0904108 8.0144698 4.9980469 8.0253906 L 4.9980469 6.0957031 C 4.9980469 5.4801031 5.478082 5 6.09375 5 z M 11.498047 6 A 0.5 0.5 0 0 0 10.998047 6.5 A 0.5 0.5 0 0 0 11.498047 7 A 0.5 0.5 0 0 0 11.998047 6.5 A 0.5 0.5 0 0 0 11.498047 6 z M 20.498047 6 A 0.5 0.5 0 0 0 19.998047 6.5 A 0.5 0.5 0 0 0 20.498047 7 A 0.5 0.5 0 0 0 20.998047 6.5 A 0.5 0.5 0 0 0 20.498047 6 z M 5.2753906 9 L 26.724609 9 C 27.06404 9 27.467839 9.162525 27.716797 9.390625 C 27.965755 9.618625 28.054067 9.83815 27.978516 10.09375 L 26.083984 16.5 L 24.498047 16.5 A 0.50005 0.50005 0 1 0 24.498047 17.5 L 26.058594 17.5 L 27.970703 25.876953 C 28.033573 26.152453 27.934073 26.393341 27.691406 26.619141 C 27.448744 26.844841 27.066676 27 26.724609 27 L 5.2753906 27 C 4.9333234 27 4.5512553 26.844841 4.3085938 26.619141 C 4.065932 26.393341 3.9664285 26.152453 4.0292969 25.876953 L 5.9414062 17.5 L 7.4980469 17.5 A 0.50005 0.50005 0 1 0 7.4980469 16.5 L 5.9160156 16.5 L 4.0214844 10.09375 C 3.9459304 9.83815 4.0342444 9.618625 4.2832031 9.390625 C 4.532162 9.162525 4.93596 9 5.2753906 9 z M 21.513672 10.994141 L 21.513672 10.996094 A 0.50005 0.50005 0 0 0 21.332031 11.023438 L 18.345703 12.023438 A 0.50005 0.50005 0 1 0 18.662109 12.970703 L 20.998047 12.189453 L 20.998047 24.507812 A 0.50005 0.50005 0 1 0 21.998047 24.507812 L 21.998047 11.507812 A 0.50005 0.50005 0 0 0 21.998047 11.492188 A 0.50005 0.50005 0 0 0 21.990234 11.408203 A 0.50005 0.50005 0 0 0 21.984375 11.378906 A 0.50005 0.50005 0 0 0 21.941406 11.265625 A 0.50005 0.50005 0 0 0 21.927734 11.240234 A 0.50005 0.50005 0 0 0 21.513672 10.994141 z M 14.472656 11 C 12.951125 11.025104 11.581223 12.067428 11.175781 13.595703 A 0.50005 0.50005 0 1 0 12.142578 13.851562 C 12.476422 12.593063 13.691746 11.814063 14.955078 12.039062 C 16.218412 12.264062 17.10071 13.42035 16.988281 14.71875 C 16.875844 16.01705 15.809956 17 14.527344 17 A 0.50005 0.50005 0 0 0 14.357422 17.027344 C 14.237973 17.016496 14.11955 17 13.998047 17 A 0.50004997 0.50004997 0 1 0 13.998047 18 C 15.212829 18 16.304645 18.731116 16.769531 19.853516 C 17.234402 20.976016 16.978116 22.263947 16.119141 23.123047 C 15.260151 23.982147 13.971931 24.238337 12.849609 23.773438 C 11.727274 23.308438 10.998021 22.216953 10.998047 21.001953 A 0.50004997 0.50004997 0 1 0 9.9980469 21.001953 C 9.998013 22.618453 10.973413 24.078666 12.466797 24.697266 C 13.960161 25.315866 15.683231 24.973178 16.826172 23.830078 C 17.969094 22.687078 18.311882 20.964203 17.693359 19.470703 C 17.365024 18.677975 16.795867 18.036418 16.095703 17.603516 C 17.129757 17.0693 17.877458 16.039313 17.984375 14.804688 C 18.140328 13.003688 16.900628 11.369888 15.130859 11.054688 C 14.909639 11.015287 14.690018 10.996414 14.472656 11 z " id="rect3486" style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" transform="translate(0,1020.3622)"/></g></svg>
           <svg v-if="column.icon === 'email'" height="20" id="svg4050" version="1.1" viewBox="0 0 32 32.000001" width="32" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs4052"/><g id="layer1" transform="translate(0,-1020.3622)"><path d="M 6 6.9980469 C 4.9006494 6.9980469 4 7.8986469 4 8.9980469 L 4 22.998047 C 4 24.097347 4.9006494 24.998047 6 24.998047 L 7.4238281 24.998047 A 0.50005 0.50005 0 0 0 7.5761719 24.998047 L 24.423828 24.998047 A 0.50005 0.50005 0 0 0 24.576172 24.998047 L 26 24.998047 C 27.099351 24.998047 28 24.097347 28 22.998047 L 28 8.9980469 C 28 7.8986469 27.099351 6.9980469 26 6.9980469 L 24.523438 6.9980469 L 7.5 6.9980469 L 6 6.9980469 z M 6 7.9980469 L 7.3222656 7.9980469 L 15.681641 14.882812 A 0.50005 0.50005 0 0 0 16.318359 14.882812 L 24.677734 7.9980469 L 26 7.9980469 C 26.562647 7.9980469 27 8.4353469 27 8.9980469 L 27 22.998047 C 27 23.560647 26.562647 23.998047 26 23.998047 L 25 23.998047 L 25 10.998047 A 0.50005 0.50005 0 0 0 24.181641 10.611328 L 16 17.349609 L 7.8183594 10.611328 A 0.50005 0.50005 0 0 0 7.4941406 10.498047 A 0.50005 0.50005 0 0 0 7 10.998047 L 7 23.998047 L 6 23.998047 C 5.4373528 23.998047 5 23.560647 5 22.998047 L 5 8.9980469 C 5 8.4353469 5.4373528 7.9980469 6 7.9980469 z M 8.8945312 7.9980469 L 23.105469 7.9980469 L 16 13.849609 L 8.8945312 7.9980469 z M 8 12.056641 L 15.681641 18.382812 A 0.50005 0.50005 0 0 0 16.318359 18.382812 L 24 12.056641 L 24 23.998047 L 8 23.998047 L 8 12.056641 z " id="rect4882" style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0999999;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" transform="translate(0,1020.3622)"/></g></svg>
@@ -11,7 +26,7 @@
           {{column.title}}
 
           <button :ref="bindColMenuButton(colIndex)" @click="toggleColumnMenuPopover(colIndex)" class="w-1/12 focus:outline-none">
-            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
           </button>
@@ -25,7 +40,12 @@
           </div>
         </div>
 
-        <div class="w-full" :class="{'flex': colIndex === 0}" v-for="(row, rowIndex) in structure.rows" :key="rowIndex">
+        <div
+          class="w-full"
+          :class="{'flex': colIndex === 0}"
+          v-for="(row, rowIndex) in structure.rows"
+          :key="rowIndex">
+
           <input
             v-if="column.type === 'string'"
             :readonly="disabled"
@@ -256,6 +276,8 @@
         col: 0
       }
 
+      const selectedRows: number[] = []
+
       // popover related values
       const showCreateTabPopover:boolean = false
       const showNSLC:boolean = false
@@ -298,6 +320,8 @@
       }
 
       const disabled: boolean = true
+      const searchQuery:string = ""
+
       return {
         structure,
         disabled,
@@ -312,7 +336,9 @@
         showNewDateColumn,
         showNewMultilineColumn,
         multiline_input_popup,
-        currentMultilineInput
+        currentMultilineInput,
+        selectedRows,
+        searchQuery
       }
     },
 
@@ -320,7 +346,19 @@
       const activeCell = this.activeCell
       if(this.$refs[`col-${activeCell.col}-row-${activeCell.row}`]) (this.$refs[`col-${activeCell.col}-row-${activeCell.row}`] as HTMLElement).focus()
     },
+    computed: {
+
+    },
     methods: {
+      search() {},
+      rowSelect(rowIndex:number) {
+        const index:number = this.selectedRows.indexOf(rowIndex)
+        if (index > -1) {
+          this.selectedRows.splice(index, 1)
+        } else {
+          this.selectedRows.push(rowIndex)
+        }
+      },
       saveMultiline(e:string) {
         const activeCell:HTMLInputElement = this.$refs[`col-${this.activeCell.col}-row-${this.activeCell.row}`] as HTMLInputElement
         activeCell.setAttribute('data-value', e)
