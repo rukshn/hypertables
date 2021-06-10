@@ -1,5 +1,7 @@
 
-<img src="https://i.imgur.com/rLwvBEq.png" height="256" />
+<p stryle="text-align: center;">
+  <img src="https://i.imgur.com/rLwvBEq.png" height="256" />
+</p>
 
 # HyperTables⚡️
 
