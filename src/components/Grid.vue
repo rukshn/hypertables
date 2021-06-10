@@ -2,12 +2,15 @@
   <div>
     <multiline-input :currentValue="currentMultilineInput" v-if="multiline_input_popup" @save-multiline="saveMultiline" @close-multiline-popup="multiline_input_popup = false" />
     <div class="py-1 px-3 flex space-x-2 border-b border-gray-200">
-      <input v-model="searchQuery" @change="search" type="text" class="border-gray-300 w-64 rounded-md border-2 focus:outline-none focus:border-indigo-500 px-2 py-1" placeholder="Search">
+      <input v-model="searchQuery" @change="search" type="text" class="border-gray-300 w-80 rounded-md border-2 focus:outline-none focus:border-indigo-500 px-2 py-1" placeholder="Search">
       <button class="border-2 w-12 flex justify-center px-1 py-1 border-gray-300 rounded-md focus:bg-gray-100 hover:border-gray-400 focus:outline-none">
         <svg enable-background="new 0 0 80 80" height="24" id="Icons" version="1.1" viewBox="0 0 80 80" width="80px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="61,37 43,37 43,19 37,19 37,37 19,37 19,43 37,43 37,61 43,61 43,43 61,43 "/></svg>
       </button>
       <button class="border-2 w-12 flex justify-center px-1 py-1 border-gray-300 rounded-md focus:bg-gray-100 hover:border-gray-400 focus:outline-none">
         <svg enable-background="new 0 0 80 80" height="24" id="Icons" version="1.1" viewBox="0 0 80 80" width="24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M52,33v29H28V33H52 M57,28H23v39h34V28L57,28z"/><path d="M45,20v-3H35v3H20v5h40v-5H45z"/></g></svg>
+      </button>
+      <button class="border-2 w-12 flex justify-center px-1 py-1 border-gray-300 rounded-md focus:bg-gray-100 hover:border-gray-400 focus:outline-none">
+        <svg height="24" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M256,384.1c-70.7,0-128-57.3-128-128.1c0-70.8,57.3-128.1,128-128.1V84l96,64l-96,55.7v-55.8   c-59.6,0-108.1,48.5-108.1,108.1c0,59.6,48.5,108.1,108.1,108.1S364.1,316,364.1,256H384C384,327,326.7,384.1,256,384.1z"/></g></svg>
       </button>
     </div>
     <div class="grid_column flex">
@@ -301,7 +304,7 @@
           icon?: string
         } >
       } = {
-        rows: 5,
+        rows: 1,
         columns: [{
           title: "Name",
           type: "string",
