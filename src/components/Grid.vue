@@ -3,7 +3,10 @@
     <multiline-input :currentValue="currentMultilineInput" v-if="multiline_input_popup" @save-multiline="saveMultiline" @close-multiline-popup="multiline_input_popup = false" />
     <div class="py-1 px-3 flex space-x-2 border-b border-gray-200">
       <input v-model="searchQuery" @change="search" type="text" class="border-gray-300 w-80 rounded-md border-2 focus:outline-none focus:border-indigo-500 px-2 py-1" placeholder="Search">
-      <button class="border-2 w-12 flex justify-center px-1 py-1 border-gray-300 rounded-md focus:bg-gray-100 hover:border-gray-400 focus:outline-none">
+      <button class="bg-green-200 w-16 items-center flex justify-center px-1 py-1 rounded-md hover:bg-green-300 focus:outline-none">
+        Save
+      </button>
+      <button @click="addRow" class="border-2 w-12 flex justify-center px-1 py-1 border-gray-300 rounded-md focus:bg-gray-100 hover:border-gray-400 focus:outline-none">
         <svg enable-background="new 0 0 80 80" height="24" id="Icons" version="1.1" viewBox="0 0 80 80" width="80px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="61,37 43,37 43,19 37,19 37,37 19,37 19,43 37,43 37,61 43,61 43,43 61,43 "/></svg>
       </button>
       <button class="border-2 w-12 flex justify-center px-1 py-1 border-gray-300 rounded-md focus:bg-gray-100 hover:border-gray-400 focus:outline-none">
@@ -15,10 +18,15 @@
     </div>
     <div class="grid_column flex">
       <div class="w-32">
-        <div class="bg-gray-100 max-h-8 text-left text-sm border-r border-b border-gray-300 select-none py-1 px-2">#</div>
-        <div class="focus-within:border-gray-200 focus-within:bg-blue-100 py-1 px-1 border border-gray-100 min-w-full" v-for="(row, rowIndex) in structure.rows" :key="rowIndex">
-          <input data-value="" @change="rowSelect(rowIndex)" class="focus:outline-none" type="checkbox" />
+        <div class="bg-gray-100 px-5 max-h-8 text-left text-sm border-r border-b border-gray-300 select-none py-1">#</div>
+        <div class="focus-within:bg-blue-100 px-5 space-x-4 focus-within:border-gray-200 py-1 border border-gray-100 min-w-full" v-for="(row, rowIndex) in structure.rows" :key="rowIndex">
+          <input name="row_select" data-value="" @change="rowSelect(rowIndex)" class="focus:outline-none" type="checkbox" />
+          <label for="row_select" class="text-sm">{{rowIndex}}</label>
         </div>
+        <button @click="addRow" class="w-full max-h-8 py-1 px-4 flex bg-gray-100 border-gray-200 border focus:outline-none hover:bg-gray-200">
+          <svg enable-background="new 0 0 80 80" height="24" id="Icons" version="1.1" viewBox="0 0 80 80" width="24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="61,37 43,37 43,19 37,19 37,37 19,37 19,43 37,43 37,61 43,61 43,43 61,43 "/></svg>
+          Add
+        </button>
       </div>
       <div v-for="(column, colIndex) in structure.columns" :key="colIndex" :ref="bindCol(colIndex)">
         <div class="bg-gray-100 max-h-8 flex text-sm border-b border-r border-gray-300 text-center select-none py-1 px-2 w-full">
@@ -354,6 +362,10 @@
     },
     methods: {
       search() {},
+      addRow() {
+        this.structure.rows += 1
+      },
+      refresh() {},
       rowSelect(rowIndex:number) {
         const index:number = this.selectedRows.indexOf(rowIndex)
         if (index > -1) {
