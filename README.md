@@ -12,7 +12,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/rukshn/hypertables)](https://github.com/rukshn/hypertables/issues)
 [![GitHub stars](https://img.shields.io/github/stars/rukshn/hypertables)](https://github.com/rukshn/hypertables/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/rukshn/hypertables)](https://github.com/rukshn/hypertables/network)
-[![Twitter](https://img.shields.io/twitter/url?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Frukshn%2Fhypertables)
+[![Twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Frukshn%2Fhypertables)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Frukshn%2Fhypertables))
 
 An open-source frontend for your database to perform CURD actions, as simple as working with Excel or AirTable.
 
