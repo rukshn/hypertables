@@ -6,7 +6,7 @@
         :key="index"
         :data-tab="index"
         :ref="bindRef(index)"
-        @click="changeTab(index)"
+        @click="switchTable(index)"
         class='py-1 px-2 rounded-t-md bg-blue-700 select-none text-white cursor-pointer'>{{table}}</li>
 	  </ul>
   </div>
@@ -33,7 +33,7 @@ export default defineComponent({
     bindRef(tab:number) {
       return `tab-${tab}`
     },
-    changeTab(tab:number) {
+    switchTable(tab:number) {
       const oldTab:HTMLElement = this.$refs[`tab-${this.tab}`] as HTMLElement
       oldTab.classList.remove('bg-white')
       oldTab.classList.add('bg-blue-700', 'text-white')
@@ -41,6 +41,7 @@ export default defineComponent({
       const newTab:HTMLElement = this.$refs[`tab-${this.tab}`] as HTMLElement
       newTab.classList.remove('bg-blue-700', 'text-white')
       newTab.classList.add('bg-white')
+      this.$emit('switchTable', newTab.innerText)
     }
   }
 })
