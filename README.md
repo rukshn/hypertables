@@ -1,9 +1,11 @@
 
-<img src="https://i.imgur.com/rLwvBEq.png" height="256" />
+<p align="center">
+  <img src="https://i.imgur.com/rLwvBEq.png" height="256" />
+</p>
 
-# HyperTables⚡️
-
-
+<h1 align="center">
+  HyperTables⚡️
+</h1>
 
 
 [![GitHub license](https://img.shields.io/github/license/rukshn/hypertables)](https://github.com/rukshn/hypertables/blob/main/LICENSE)
@@ -49,6 +51,7 @@ Start the server
 ```bash
   npm run dev
 ```
+<<<<<<< HEAD
 
 ## Contributing
 
@@ -57,3 +60,5 @@ Contributions are always welcome!
 Feel free to see our code, and make a pull request with your contribution.
 
 Found a bug? Open an issue on GitHub.
+=======
+>>>>>>> 3d8f1d22044823d5547fec2549022d58efd6f10f
