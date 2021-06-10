@@ -6,7 +6,11 @@
 
 
 
-[![AGPL License](https://img.shields.io/badge/license-GPL%203.0-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+[![GitHub license](https://img.shields.io/github/license/rukshn/hypertables)](https://github.com/rukshn/hypertables/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/rukshn/hypertables)](https://github.com/rukshn/hypertables/issues)
+[![GitHub stars](https://img.shields.io/github/stars/rukshn/hypertables)](https://github.com/rukshn/hypertables/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/rukshn/hypertables)](https://github.com/rukshn/hypertables/network)
+[![Twitter](https://img.shields.io/twitter/url?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Frukshn%2Fhypertables)
 
 An open-source frontend for your database to perform CURD actions, as simple as working with Excel or AirTable.
 
