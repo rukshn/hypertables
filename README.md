@@ -22,7 +22,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd hypertables
 ```
 
 Install dependencies
@@ -45,3 +45,11 @@ Start the server
 ```bash
   npm run dev
 ```
+
+## Contributing
+
+Contributions are always welcome!
+
+Feel free to see our code, and make a pull request with your contribution.
+
+Found a bug? Open an issue on GitHub.
