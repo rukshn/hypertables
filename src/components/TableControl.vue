@@ -7,7 +7,7 @@
         :data-tab="index"
         :ref="bindRef(index)"
         @click="changeTab(index)"
-        class='py-1 px-2 rounded-t-sm bg-blue-700 select-none text-white cursor-pointer'>{{table}}</li>
+        class='py-1 px-2 rounded-t-md bg-blue-700 select-none text-white cursor-pointer'>{{table}}</li>
 	  </ul>
   </div>
 </template>
