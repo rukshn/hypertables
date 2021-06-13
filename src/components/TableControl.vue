@@ -1,14 +1,17 @@
 <template>
-  <div class="bg-blue-500">
+  <div class="bg-blue-600">
   	<ul class='flex space-x-0.5'>
       <li
         v-for="(table, index) in tables"
         :key="index"
         :data-tab="index"
         :ref="bindRef(index)"
-        class='rounded-t-md bg-blue-600 select-none text-white cursor-pointer flex'>
-          <button @click="switchTable(index, table)" class="py-2 font-semibold items-center capitalize px-2 text-sm focus:outline-none">{{table}}</button>
-          <button @click="removeTable(index)" class="focus:outline-none ml-2 px-1 fillGray">
+        class='rounded-t-md bg-blue-500 select-none text-white cursor-pointer flex'>
+          <button @click="switchTable(index, table)" class="py-2 flex space-x-2 fillGray font-semibold items-center capitalize px-2 text-sm focus:outline-none">
+            <svg height="16" viewBox="0 0 1792 1792" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M576 1376v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm0-384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm-512-768v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm-512-768v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm0-384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm128-320v1088q0 66-47 113t-113 47h-1344q-66 0-113-47t-47-113v-1088q0-66 47-113t113-47h1344q66 0 113 47t47 113z"/></svg>
+            <span>{{table}}</span>
+          </button>
+          <button @click="removeTable(index)" class="focus:outline-none px-2 fillGray">
             <svg height="16" viewBox="0 0 48 48" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/><path d="M0 0h48v48h-48z" fill="none"/></svg>
           </button>
         </li>
@@ -52,14 +55,18 @@ export default defineComponent({
     switchTable(tab:number) {
       const oldTab:HTMLElement = this.$refs[`tab-${this.tab}`] as HTMLElement
       oldTab.classList.remove('bg-white')
-      oldTab.classList.add('bg-blue-600', 'text-white')
-      let closeButton:HTMLButtonElement = oldTab.childNodes[1] as HTMLButtonElement
+      oldTab.classList.add('bg-blue-500', 'text-white')
+      let tableIcon = oldTab.firstChild as HTMLElement
+      let closeButton = oldTab.lastChild as HTMLElement
+      tableIcon.classList.add('fillGray')
       closeButton.classList.add('fillGray')
       this.tab = tab
       const newTab:HTMLElement = this.$refs[`tab-${this.tab}`] as HTMLElement
-      newTab.classList.remove('bg-blue-600', 'text-white')
+      newTab.classList.remove('bg-blue-500', 'text-white')
       newTab.classList.add('bg-white')
-      closeButton = newTab.childNodes[1] as HTMLButtonElement
+      tableIcon = newTab.firstChild as HTMLElement
+      closeButton = newTab.lastChild as HTMLElement
+      tableIcon.classList.remove('fillGray')
       closeButton.classList.remove('fillGray')
       this.$emit('switchTable', newTab.getAttribute('data-tab'))
     }
@@ -68,10 +75,7 @@ export default defineComponent({
 </script>
 
 <style>
-  .fillWhite {
-    fill: white;
-  }
   .fillGray {
-    fill: rgb(226, 226, 226);
+    fill: #b5d9ff;
   }
 </style>
