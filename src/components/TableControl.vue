@@ -45,9 +45,8 @@ export default defineComponent({
       if (this.tables.length === 1) {
         return this.tables.pop()
       } else {
-        this.switchTable(index - 1)
+        this.tables.splice(index,1)
       }
-      this.tables.splice(index,1)
     },
     bindRef(tab:number) {
       return `tab-${tab}`
