@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar select-none bg-blue-500 py-2 px-5 flex justify-center">
+  <div class="navbar select-none bg-blue-600 py-2 px-5 flex justify-center">
     <h1 class="text-white font-bold flex items-center">HyperTables⚡️</h1>
     <h1 class="text-white font-bold flex items-center text-lg flex-grow justify-center">Database Name</h1>
     <div class="buttons flex content-end items-center w-1/12">
