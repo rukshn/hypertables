@@ -381,7 +381,7 @@
     },
 
     watch: {
-      activeTable(newIndex:number) {
+      activeTable(newIndex:string) {
         this.updateColumns()
       }
     },
@@ -405,7 +405,7 @@
       },
       updateColumns() {
         const _this = this
-        this.tableName = this.tables[this.activeTable]
+        this.tableName = this.activeTable
         var columnStructure: Array <{
           title: string,
           type: string,
@@ -495,6 +495,7 @@
         const promptBox:any = prompt("New Column Name?")
         if (promptBox.length === 0) return
         this.structure.columns[colIndex].title = promptBox
+        fetch(`${this.host}/_ht/rename-column`)
       },
 
       fireCancel() {
@@ -502,11 +503,33 @@
       },
 
       createColumnMakeRequest(tableName:string, columnName:string, dataType:string) {
+        let columnDataType: string = 'varchar(255)'
+        let filteredColumnName = columnName.substr(0, 63)
         if (dataType === 'string' || dataType === 'email' || dataType === 'phone') {
-          dataType = 'varchar(255)'
+          columnDataType = 'varchar(255)'
         } else if (dataType === 'multiline' || dataType === 'link') {
-          dataType = 'text'
+          columnDataType = 'text'
+        } else if (dataType === 'date') {
+          columnDataType = 'date'
+        } else if (dataType === 'timestamp') {
+          columnDataType = 'timestamp'
         }
+
+        fetch(`${this.host}/_ht/create-column`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            tableName: tableName,
+            columnName: columnName,
+            dataType: columnDataType
+          })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+        })
       },
       createColumn(type:string) {
         if (type === 'string') {
@@ -517,6 +540,8 @@
             visible: true
           }
           this.structure.columns.push(newColumn)
+          const activeTable = this.activeTable
+          this.createColumnMakeRequest(activeTable, newColumn.title, newColumn.type)
         } else if (type === 'email') {
           const newColumn: {title: string, type: string, icon: string, isPrimaryKey: boolean, visible: boolean} = {
             title: this.newColumnName || 'Email' + this.structure.columns.length + 1,
@@ -526,6 +551,8 @@
             visible: true
           }
           this.structure.columns.push(newColumn)
+          const activeTable = this.activeTable
+          this.createColumnMakeRequest(activeTable, newColumn.title, newColumn.type)
         } else if (type === 'date') {
           const newColumn: {title: string, type: string, icon: string, isPrimaryKey: boolean, visible: boolean} = {
             title: this.newColumnName || 'Date' + this.structure.columns.length + 1,
@@ -535,6 +562,8 @@
             visible: true
           }
           this.structure.columns.push(newColumn)
+          const activeTable = this.activeTable
+          this.createColumnMakeRequest(activeTable, newColumn.title, newColumn.type)
         } else if (type === 'multiline') {
           const newColumn: {title: string, type: string, icon: string, isPrimaryKey:boolean, visible: boolean} = {
             title: this.newColumnName || 'Text' + this.structure.columns.length + 1,
@@ -544,6 +573,8 @@
             visible: true
           }
           this.structure.columns.push(newColumn)
+          const activeTable = this.activeTable
+          this.createColumnMakeRequest(activeTable, newColumn.title, newColumn.type)
         }
 
         this.newColumnName = ''
