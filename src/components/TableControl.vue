@@ -4,7 +4,7 @@
       <li
         v-for="(table, index) in tables"
         :key="index"
-        :data-tab="table"
+        :data-tab="index"
         :ref="bindRef(index)"
         class='rounded-t-md bg-blue-500 select-none text-white cursor-pointer flex'>
           <button @click="switchTable(index, table)" class="py-2 flex space-x-2 fillGray font-semibold items-center capitalize px-2 text-sm focus:outline-none">
@@ -51,7 +51,7 @@ export default defineComponent({
     bindRef(tab:number) {
       return `tab-${tab}`
     },
-    switchTable(tab:number) {
+    switchTable(tab:number, table:string) {
       const oldTab:HTMLElement = this.$refs[`tab-${this.tab}`] as HTMLElement
       oldTab.classList.remove('bg-white')
       oldTab.classList.add('bg-blue-500', 'text-white')
@@ -67,7 +67,7 @@ export default defineComponent({
       closeButton = newTab.lastChild as HTMLElement
       tableIcon.classList.remove('fillGray')
       closeButton.classList.remove('fillGray')
-      this.$emit('switchTable', newTab.getAttribute('data-tab'))
+      this.$emit('switchTable', table)
     }
   }
 })
