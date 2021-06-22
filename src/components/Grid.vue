@@ -453,9 +453,11 @@
           _this.structure.columns = columnStructure
         })
       },
+
       refresh() {
 
       },
+
       rowSelect(rowIndex:number) {
         const index:number = this.selectedRows.indexOf(rowIndex)
         if (index > -1) {
@@ -464,6 +466,7 @@
           this.selectedRows.push(rowIndex)
         }
       },
+
       saveMultiline(e:string) {
         const activeCell:HTMLInputElement = this.$refs[`col-${this.activeCell.col}-row-${this.activeCell.row}`] as HTMLInputElement
         activeCell.setAttribute('data-value', e)
@@ -487,19 +490,52 @@
       fireConfirm(event: string) {
         if (event === 'renameColumn') {
           this.displayNotification = false
-          this.renameColumn(this.tempCol)
+          this.renameColumnMakeRequest(this.tempCol)
         }
-      },
-
-      renameColumn(colIndex:number) {
-        const promptBox:any = prompt("New Column Name?")
-        if (promptBox.length === 0) return
-        this.structure.columns[colIndex].title = promptBox
-        fetch(`${this.host}/_ht/rename-column`)
       },
 
       fireCancel() {
         this.displayNotification = false
+      },
+
+      renameColumnMakeRequest(colIndex:number) {
+        const promptBox:any = prompt("New Column Name?")
+        if (promptBox.length === 0) return
+        const oldName: string = this.structure.columns[colIndex].title
+        this.structure.columns[colIndex].title = promptBox
+        fetch(`${this.host}/_ht/rename-column`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            tableName: this.activeTable,
+            oldName: oldName,
+            newName: promptBox
+          })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+        })
+      },
+
+      deleteColumnMakeRequest(colIndex:number) {
+        const columnName: string = this.structure.columns[colIndex].title
+        fetch(`${this.host}/_ht/delete-column`, {
+          method: 'POSt',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            tableName: this.activeTable,
+            columnName: columnName
+          })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+        })
       },
 
       createColumnMakeRequest(tableName:string, columnName:string, dataType:string) {
@@ -531,6 +567,7 @@
           console.log(data)
         })
       },
+
       createColumn(type:string) {
         if (type === 'string') {
           const newColumn: {title: string, type: string, isPrimaryKey: boolean, visible: boolean} = {
@@ -583,6 +620,7 @@
         this.showNewDateColumn = false
         this.showNewEmailColumn = false
       },
+
       showMultilineInput(colIndex:number, rowIndex:number) {
         this.activeCell.col = colIndex
         this.activeCell.row = rowIndex
