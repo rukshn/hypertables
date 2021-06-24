@@ -20,11 +20,21 @@ export default defineComponent({
     TableControl
   },
   data() {
-    const tables:string[] = ['Patients', 'Investigations']
+    const host = import.meta.env.VITE_DB_HOST
+    const tables:string[] = []
     return {
+      host,
       tables
     }
-  }
+  },
+  mounted() {
+    const vm = this
+    fetch(`${this.host}/_ht/get-tables`)
+    .then((response) => response.json())
+    .then((data) => {
+      vm.tables = data
+    })
+  },
 })
 </script>
 
