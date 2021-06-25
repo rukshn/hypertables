@@ -11,13 +11,17 @@ import { defineComponent } from 'vue'
 import Grid from './components/Grid.vue'
 import Navbar from './components/Navbar.vue'
 import TableControl from './components/TableControl.vue'
+import NewTable from './components/NewTable.vue'
+import TableList from './components/TableList.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
     Grid,
     Navbar,
-    TableControl
+    TableControl,
+    NewTable,
+    TableList
   },
   data() {
     const host = import.meta.env.VITE_DB_HOST
