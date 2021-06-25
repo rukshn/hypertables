@@ -5,6 +5,12 @@
       <h1 class="title font-bold text-xl">Create A New Table</h1>
 
       <form class="space-y-2" @submit.prevent="createTable">
+        <p class="text-sm text-red-600" v-if="showError">
+          {{message}}
+        </p>
+        <p class="text-sm text-green-600" v-if="showSuccess">
+          {{message}}
+        </p>
         <div class="field space-y-1">
           <label class="font-bold">Table Name</label>
           <div class="control">
@@ -25,7 +31,7 @@
         </div>
         <div class="buttons py-3 space-x-2">
           <button class="rounded-md py-2 px-3 bg-indigo-600 hover:bg-indigo-700 focus:outline-none font-bold text-white">Create Table</button>
-          <button type="button" class="rounded-md py-2 px-3 border-3 bg-gray-200 hover:bg-gray-300 focus:outline-none font-bold">Cancel</button>
+          <button @click="closePopup" type="button" class="rounded-md py-2 px-3 border-3 bg-gray-200 hover:bg-gray-300 focus:outline-none font-bold">Cancel</button>
         </div>
       </form>
     </div>
@@ -41,10 +47,17 @@ export default defineComponent({
     const tableName: string = ""
     const primaryKey: string = ""
     const autoIncrement: boolean = false
+    const showError: boolean = false
+    const showSuccess: boolean = false
+    const message: string = ""
+
     return {
       tableName,
       primaryKey,
-      autoIncrement
+      autoIncrement,
+      showError,
+      showSuccess,
+      message
     }
   },
   methods: {
@@ -52,17 +65,42 @@ export default defineComponent({
       this.$emit('close')
     },
     createTable() {
-      fetch(`${host}/_ht/create-table`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-          tableName: this.tableName,
-          primaryKey: this.primaryKey,
-          autoIncrement: this.autoIncrement
+      if (this.tableName.length === 0 || this.primaryKey.length === 0) {
+        this.showError = true
+      } else {
+        const vm = this
+        fetch(`${host}/_ht/create-table`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            tableName: vm.tableName,
+            primaryKey: vm.primaryKey,
+            autoIncrement: vm.autoIncrement
+          })
         })
-      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === 200) {
+            vm.tableName = ""
+            vm.primaryKey = ""
+
+            vm.showSuccess = true
+            vm.showSuccess = false
+            vm.message = `Table ${vm.tableName} successfully created`
+          } else {
+            vm.showError = true
+            vm.showSuccess = false
+            vm.message = data.error
+          }
+        })
+        .catch((e) => {
+          vm.showError = true
+          vm.showSuccess = false
+          vm.message = e
+        })
+      }
     }
   }
 })
