@@ -16,6 +16,12 @@
             <svg height="16" viewBox="0 0 48 48" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/><path d="M0 0h48v48h-48z" fill="none"/></svg>
           </button>
         </li>
+        <li class='rounded-t-md bg-blue-500 select-none text-white cursor-pointer flex'>
+          <button @click="newTable" class="py-2 flex space-x-2 fillGray font-semibold items-center capitalize px-2 text-sm focus:outline-none">
+            <svg height="16" width="16" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg"><title/><g><path d="M66,42H54V30a6,6,0,0,0-12,0V42H30a6,6,0,0,0,0,12H42V66a6,6,0,0,0,12,0V54H66a6,6,0,0,0,0-12Z"/><path d="M48,0A48,48,0,1,0,96,48,48.0512,48.0512,0,0,0,48,0Zm0,84A36,36,0,1,1,84,48,36.0393,36.0393,0,0,1,48,84Z"/></g></svg>
+            <span>New Table</span>
+          </button>
+        </li>
 	  </ul>
   </div>
 </template>
@@ -42,6 +48,9 @@ export default defineComponent({
 
   },
   methods: {
+    newTable() {
+      this.$emit('newTable')
+    },
     removeTable(index:number) {
       if (this.tables.length === 1) {
         return this.tables.pop()
