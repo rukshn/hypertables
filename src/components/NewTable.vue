@@ -26,7 +26,7 @@
         <div class="field space-y-1">
           <label class="font-bold">Auto Increment</label>
           <div class="control">
-            <input v-model="autoIncrement" type="checkbox"> <span>Make primary key and auto increment</span>
+            <input v-model="autoIncrement" type="checkbox"> <span>Make primary key auto increment</span>
           </div>
         </div>
         <div class="buttons py-3 space-x-2">
